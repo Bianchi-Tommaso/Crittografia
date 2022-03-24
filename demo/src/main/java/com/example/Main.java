@@ -3,7 +3,6 @@ package com.example;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class Main 
 {
@@ -42,6 +41,7 @@ public class Main
 
         }
 
-        System.out.println(c.Codifica());
+        System.out.println("Il Testo Cifrato E' Il Seguente: " + c.Codifica());
+        System.out.println("Il Testo Decifrato E' Il Seguente: " + c.Decodifica(c.Codifica()));
     }
 }

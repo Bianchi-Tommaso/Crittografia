@@ -34,23 +34,41 @@ public class Cifra
             if(j == patternLength)
                 j = 0;
 
-            k = getLunghezzaChiave(j);
+                k = getLunghezzaChiave(j);
 
-            if(k.getK() + getIndice(testo.charAt(i)) >= 26)
-            {
-                int x = k.getK() + getIndice(testo.charAt(i)) - 26;
-
-                testoCifrato += alfabeto[x];
-            }
-            else
-            {
-                testoCifrato += alfabeto[k.getK() + getIndice(testo.charAt(i))];
-            }
+                if(k.getK() + getIndice(testo.charAt(i)) % 26 < 26)
+                    testoCifrato += alfabeto[k.getK() + getIndice(testo.charAt(i)) % 26];
+                else
+                    testoCifrato += alfabeto[k.getK() + getIndice(testo.charAt(i)) - 26];
 
             j++;
         }
 
-        return "Il Testo Cifrato E' Il Seguente: " + testoCifrato;
+        return testoCifrato;
+    }
+
+    public String Decodifica(String testoCifrato)
+    {
+        int j = 0;
+        String testoDecifrato = "";
+        Chiave k;
+        
+        for(int i = 0; i < testoCifrato.length(); i++)
+        {
+            if(j == patternLength)
+                j = 0;
+
+                k = getLunghezzaChiave(j);
+
+                if(getIndice(testoCifrato.charAt(i)) - k.getK() % 26 < 0)
+                    testoDecifrato += alfabeto[getIndice(testoCifrato.charAt(i)) - k.getK() % 26 + 26];
+                else
+                    testoDecifrato += alfabeto[getIndice(testoCifrato.charAt(i)) - k.getK()];
+
+            j++;
+        }
+
+        return testoDecifrato;
     }
 
     public int getIndice(char lettera)
