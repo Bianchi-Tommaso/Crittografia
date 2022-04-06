@@ -2,9 +2,9 @@ package com.example;
 
 public class MainTest
 {
-    public static void main( String[] args )
+    public static void main(String[] args)
     {
-        String testo = "testo segreto";
+        String testo = "";
         String pattern = "c1;c2;c2;c3";
         String nomeChiave1 = "c1";
         String nomeChiave2 = "c2";

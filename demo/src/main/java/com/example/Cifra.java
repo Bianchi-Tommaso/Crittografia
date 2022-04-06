@@ -6,6 +6,7 @@ public class Cifra
 {
     private String testo;
     private String[] patternArray;
+    private char[] patternArray1;
     private int patternLength;
     private static final char[] alfabeto = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
@@ -15,6 +16,8 @@ public class Cifra
     {
         this.testo = testo.replaceAll(" ", "");
         patternArray = pattern.split(";");
+        pattern = pattern.replaceAll(";", "");
+        patternArray1 = pattern.toCharArray();
         patternLength = patternArray.length;
     }
     
@@ -36,10 +39,20 @@ public class Cifra
 
                 k = getLunghezzaChiave(j);
 
-                if(k.getK() + getIndice(testo.charAt(i)) % 26 < 26)
-                    testoCifrato += alfabeto[k.getK() + getIndice(testo.charAt(i)) % 26];
+                if(k == null)
+                {
+                    if(getIndice(patternArray1[j]) + getIndice(testo.charAt(i)) % 26 < 26)
+                        testoCifrato += alfabeto[getIndice(patternArray1[j]) + getIndice(testo.charAt(i)) % 26];
+                    else
+                        testoCifrato += alfabeto[getIndice(patternArray1[i]) + getIndice(testo.charAt(i)) - 26];
+                }
                 else
-                    testoCifrato += alfabeto[k.getK() + getIndice(testo.charAt(i)) - 26];
+                {
+                    if(k.getK() + getIndice(testo.charAt(i)) % 26 < 26)
+                        testoCifrato += alfabeto[k.getK() + getIndice(testo.charAt(i)) % 26];
+                    else
+                        testoCifrato += alfabeto[k.getK() + getIndice(testo.charAt(i)) - 26];
+                }
 
             j++;
         }
@@ -60,10 +73,20 @@ public class Cifra
 
                 k = getLunghezzaChiave(j);
 
-                if(getIndice(testoCifrato.charAt(i)) - k.getK() % 26 < 0)
-                    testoDecifrato += alfabeto[getIndice(testoCifrato.charAt(i)) - k.getK() % 26 + 26];
+                if(k == null)
+                {
+                    if(getIndice(testoCifrato.charAt(i)) - getIndice(patternArray1[j]) % 26 < 0)
+                        testoDecifrato += alfabeto[getIndice(testoCifrato.charAt(i)) - getIndice(patternArray1[j]) % 26 + 26];
+                    else
+                        testoDecifrato += alfabeto[getIndice(testoCifrato.charAt(i)) - getIndice(patternArray1[j])];
+                }
                 else
-                    testoDecifrato += alfabeto[getIndice(testoCifrato.charAt(i)) - k.getK()];
+                {
+                    if(getIndice(testoCifrato.charAt(i)) - k.getK() % 26 < 0)
+                        testoDecifrato += alfabeto[getIndice(testoCifrato.charAt(i)) - k.getK() % 26 + 26];
+                    else
+                        testoDecifrato += alfabeto[getIndice(testoCifrato.charAt(i)) - k.getK()];
+                }
 
             j++;
         }

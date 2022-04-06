@@ -11,6 +11,11 @@ public class Chiave
         this.nomeChiave = nomeChiave;
     }
 
+    public Chiave(String nomeChiave)
+    {
+        this.nomeChiave = nomeChiave;
+    }
+
     public int getK() 
     {
         return k;
