@@ -66,15 +66,7 @@ public class Main
 
                 pattern1 = pattern.split(";");
 
-                for(int i = 0; i < numeroChiavi; i++)
-                {
-                    System.out.println("Inserire Nome Chiave!");
-                    nomeChiave = pattern1[i];
-
-                    Chiave chiave = new Chiave(nomeChiave);
-
-                    c.AddChiave(chiave);
-                }
+        
                 
                 break;
 

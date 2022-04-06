@@ -44,7 +44,7 @@ public class Cifra
                     if(getIndice(patternArray1[j]) + getIndice(testo.charAt(i)) % 26 < 26)
                         testoCifrato += alfabeto[getIndice(patternArray1[j]) + getIndice(testo.charAt(i)) % 26];
                     else
-                        testoCifrato += alfabeto[getIndice(patternArray1[i]) + getIndice(testo.charAt(i)) - 26];
+                        testoCifrato += alfabeto[getIndice(patternArray1[j]) + getIndice(testo.charAt(i)) - 26];
                 }
                 else
                 {
